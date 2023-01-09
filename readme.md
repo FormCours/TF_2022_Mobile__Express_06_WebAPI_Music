@@ -16,11 +16,20 @@ npm run dev
 ```
 
 ## Packages
+Web API
 - express
 - express-async-errors
 - cors
+
+Environnment
 - cross-env
 - dotenv
+
+Database
+- sequelize
+- tedious 
+
+Autres
 - morgan
 - chalk (version 4)
 

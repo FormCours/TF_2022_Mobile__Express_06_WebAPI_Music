@@ -16,6 +16,20 @@ const chalk = require('chalk');
 const router = require('./routers/router');
 
 
+// Initialisation de la base de donnée (via sequelize)
+const db = require('./models');
+
+// - Connection
+db.sequelize.authenticate()
+    .then(() => console.log(chalk.blue('Connection DB successfull')))
+    .catch((error) => console.log(chalk.red('Connection DB fail'), error));
+
+// - Sync avec la base de donnée (necessaire les droits DDL)
+if (process.env.NODE_ENV === 'development') {
+    db.sequelize.sync({ alter: true });
+}
+
+
 // Création de la Web API
 const app = express();
 
