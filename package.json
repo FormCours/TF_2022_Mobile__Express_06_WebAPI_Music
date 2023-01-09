@@ -1,0 +1,38 @@
+{
+  "name": "demo-expressjs-06",
+  "version": "0.1.0",
+  "description": "Demo d'un WebAPI avec express et sequelize",
+  "main": "server.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node server.js",
+    "dev": "cross-env NODE_ENV=development nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FormCours/TF_2022_Mobile__Express_06_WebAPI_Music.git"
+  },
+  "keywords": [
+    "TFTIC",
+    "Music",
+    "API"
+  ],
+  "author": "Aurelien",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FormCours/TF_2022_Mobile__Express_06_WebAPI_Music/issues"
+  },
+  "homepage": "https://github.com/FormCours/TF_2022_Mobile__Express_06_WebAPI_Music#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
