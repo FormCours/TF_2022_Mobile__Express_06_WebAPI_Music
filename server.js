@@ -2,7 +2,7 @@
 
 // Chargement du fichier d'environnement
 require('dotenv').config({
-    override: true
+    override: false
 });
 
 // Import d'express
@@ -13,6 +13,7 @@ require('express-async-errors');
 const cors = require('cors');
 const morgan = require('morgan');
 const chalk = require('chalk');
+const router = require('./routers/router');
 
 
 // Création de la Web API
@@ -26,7 +27,8 @@ app.use(morgan('tiny'));
 // - Gestion des données du "body" de type "application/json"
 app.use(express.json());
 
-// TODO Ajout du routing
+// Ajout du routing
+app.use('/api', router);
 
 // Gestion des erreurs
 app.use((error, req, res, next) => {
