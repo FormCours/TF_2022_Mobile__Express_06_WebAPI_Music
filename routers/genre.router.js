@@ -10,4 +10,7 @@ genreRouter.route('/')
 genreRouter.route('/:id([0-9]+)')
     .get(genreController.getById);
 
+genreRouter.route('/search/:name([a-zA-Z]+)')
+    .get(genreController.searchByName);
+
 module.exports = genreRouter;
