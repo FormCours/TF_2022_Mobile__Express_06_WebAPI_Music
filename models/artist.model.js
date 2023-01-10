@@ -1,4 +1,4 @@
-const { DataTypes, Sequelize, ModelCtor } = require('sequelize');
+const { DataTypes, Sequelize, ModelCtor, Op } = require('sequelize');
 
 /**
  * Constructeur du modele "Artist"
@@ -10,9 +10,6 @@ module.exports = (sequelize) => {
         pseudo: {
             type: DataTypes.STRING(50),
             allowNull: true,
-            unique: {
-                name: 'UK_Artist__Pseudo'
-            },
             validate: {
                 notEmpty: true,
                 requiredWithoutName(value) {
@@ -45,6 +42,18 @@ module.exports = (sequelize) => {
             allowNull: true
         }
     }, {
+        indexes: [
+            {
+                name: 'UK_Artist__Pseudo',
+                unique: true,
+                fields: ['pseudo'],
+                where: {
+                    pseudo: {
+                        [Op.ne]: null
+                    }
+                }
+            }
+        ],
         tableName: 'artist'
     });
     return Artist;

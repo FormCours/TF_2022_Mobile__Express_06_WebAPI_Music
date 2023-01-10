@@ -26,7 +26,7 @@ db.sequelize.authenticate()
 
 // - Sync avec la base de donnée (necessaire les droits DDL)
 if (process.env.NODE_ENV === 'development') {
-    db.sequelize.sync({ alter: true });
+    //db.sequelize.sync({ alter: { drop: false } });
 }
 
 
