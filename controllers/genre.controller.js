@@ -27,6 +27,15 @@ const genreController = {
         // Récuperation des données du body validé !
         const data = req.validateData;
 
+        // Verrification que le genre n'existe pas
+        if (await genreService.checkIfExists(data.name)) {
+            res.status(400).json({
+                message: `Genre "${data.name}" already exists !`,
+                status: 400,
+            });
+            return;
+        }
+
         // Utilisation du service pour ajouter les données en DB
         const newGenre = await genreService.add(data);
 

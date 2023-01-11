@@ -22,6 +22,23 @@ const genreService = {
         const genre = await db.Genre.create(data);
         return new GenreDTO(genre);
     },
+
+    checkIfExists: async (name) => {
+        const genre = await db.Genre.findOne({
+            where: {
+                // Ecriture raccourci, car le nom du parametre est egale au nom de la colonne: 
+                name
+
+                // Ecriture complete:
+                // name: {
+                //     [Op.eq]: name
+                // }
+            }
+        });
+
+        return genre !== null;
+    },
+
     searchByName: async (query) => {
         const cleanQuery = query.replaceAll(/[%_]/g, "");
         const genres = await db.Genre.findAll({
