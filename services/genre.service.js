@@ -4,8 +4,13 @@ const GenreDTO = require('../dto/genre.dto');
 
 const genreService = {
 
-    getAll: async () => {
-        const genres = await db.Genre.findAll();
+    getAll: async (offset = 0, limit = 100) => {
+
+        const genres = await db.Genre.findAll({
+            offset,
+            limit
+        });
+
         return genres.map(genre => new GenreDTO(genre));
     },
 
@@ -39,14 +44,16 @@ const genreService = {
         return genre !== null;
     },
 
-    searchByName: async (query) => {
+    searchByName: async (query, offset = 0, limit = 100) => {
         const cleanQuery = query.replaceAll(/[%_]/g, "");
         const genres = await db.Genre.findAll({
             where: {
                 name: {
                     [Op.substring]: cleanQuery
                 }
-            }
+            },
+            offset,
+            limit
         });
 
         return genres.map(genre => new GenreDTO(genre));

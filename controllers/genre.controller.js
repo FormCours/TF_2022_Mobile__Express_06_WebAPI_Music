@@ -1,11 +1,14 @@
-const db = require('../models');
 const genreService = require('../services/genre.service');
-const { genreValidator } = require('../validators/genre.validator');
 
 const genreController = {
     getAll: async (req, res) => {
-        const data = await genreService.getAll();
+        // Récuperation les infos de pagination (ajouter via le middleware)
+        const { offset, limit } = req.pagination;
 
+        // Récuperation des données dans la DB
+        const data = await genreService.getAll(offset, limit);
+
+        // Envoi de la réponse
         res.status(200).json(data);
     },
 
@@ -47,8 +50,10 @@ const genreController = {
     searchByName: async (req, res) => {
 
         const query = req.params.name;
+        const { offset, limit } = req.pagination;
+
         console.log(query);
-        const genresByName = await genreService.searchByName(query);
+        const genresByName = await genreService.searchByName(query, offset, limit);
         console.log(genresByName);
 
         res.status(200).json(genresByName);
