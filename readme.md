@@ -30,6 +30,7 @@ Database
 - tedious 
 
 Autres
+- yup
 - morgan
 - chalk (version 4)
 

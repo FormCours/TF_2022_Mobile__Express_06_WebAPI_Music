@@ -1,5 +1,6 @@
 const db = require('../models');
 const genreService = require('../services/genre.service');
+const { genreValidator } = require('../validators/genre.validator');
 
 const genreController = {
     getAll: async (req, res) => {
@@ -23,14 +24,15 @@ const genreController = {
     },
 
     add: async (req, res) => {
+        // Récuperation des données du body validé !
+        const data = req.validateData;
 
-        const data = req.body;
-
+        // Utilisation du service pour ajouter les données en DB
         const newGenre = await genreService.add(data);
 
+        // Envoi d'un réponse
         res.location('/api/genre/' + newGenre.id);
-        res.sendStatus(201).json(newGenre);
-
+        res.status(201).json(newGenre);
     },
 
     searchByName: async (req, res) => {
