@@ -46,7 +46,7 @@ app.use('/api', router);
 
 // Gestion des erreurs
 app.use((error, req, res, next) => {
-    if (process.env.NODE_ENV === 'developement') {
+    if (process.env.NODE_ENV === 'development') {
         console.error(error);
         res.status(500).json(error);
         return;
