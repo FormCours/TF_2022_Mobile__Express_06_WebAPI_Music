@@ -4,13 +4,22 @@ const db = require('../models');
 
 const artistService = {
 
-    getAll: async () => {
+    getAll: async (offset = 0, limit = 100) => {
 
-        // Recuperation des données via Sequelize
-        const artists = await db.Artist.findAll();
+        // Recuperation des données via Sequelize (Toutes les données)
+        // const artists = await db.Artist.findAll();
+
+        // Recuperation des données via Sequelize (Pagination + Count)
+        const { count, rows } = await db.Artist.findAndCountAll({
+            offset,
+            limit
+        });
 
         // Envoi des données dans un objet DTO
-        return artists.map(a => new ArtistDTO(a));
+        return {
+            artists: rows.map(a => new ArtistDTO(a)),
+            count
+        };
     },
 
     getById: async (id) => {
@@ -75,6 +84,15 @@ const artistService = {
         });
 
         return nbRowDeleted === 1;
+    },
+
+    checkIfPseudoExists: async (pseudo) => {
+
+        const artist = await db.Artist.findOne({
+            where: { pseudo }
+        });
+
+        return artist !== null;
     }
 };
 
