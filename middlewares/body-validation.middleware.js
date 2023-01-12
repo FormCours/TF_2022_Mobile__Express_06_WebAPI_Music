@@ -1,5 +1,6 @@
 const { Request, Response, NextFunction } = require('express');
 const { BaseSchema } = require('yup');
+const { InvalidBodyErrorResponse } = require('../api-responses/error-response');
 
 
 /**
@@ -46,11 +47,11 @@ const bodyValidation = (validator, errorCode = 422) => {
                 }
 
                 // - Envoi une reponse d'erreur
-                res.status(errorCode).json({
-                    message: 'Data invalid',
-                    status: errorCode,
-                    errors: validationErrors
-                });
+                res.status(errorCode).json(new InvalidBodyErrorResponse(
+                    'Data invalid',
+                    validationErrors,
+                    errorCode
+                ));
             });
     };
 };

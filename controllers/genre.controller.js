@@ -1,3 +1,5 @@
+const { ErrorResponse } = require('../api-responses/error-response');
+const { SuccessResponse, SuccessCollectionResponse } = require('../api-responses/success-response');
 const genreService = require('../services/genre.service');
 
 const genreController = {
@@ -6,10 +8,10 @@ const genreController = {
         const { offset, limit } = req.pagination;
 
         // Récuperation des données dans la DB
-        const data = await genreService.getAll(offset, limit);
+        const { genres, count } = await genreService.getAll(offset, limit);
 
         // Envoi de la réponse
-        res.status(200).json(data);
+        res.status(200).json(new SuccessCollectionResponse(genres, count));
     },
 
     getById: async (req, res) => {
@@ -22,7 +24,7 @@ const genreController = {
             return;
         }
 
-        res.status(200).json(data);
+        res.status(200).json(new SuccessResponse(data));
 
     },
 
@@ -32,10 +34,9 @@ const genreController = {
 
         // Verrification que le genre n'existe pas
         if (await genreService.checkIfExists(data.name)) {
-            res.status(400).json({
-                message: `Genre "${data.name}" already exists !`,
-                status: 400,
-            });
+            res.status(400).json(new ErrorResponse(
+                `Genre "${data.name}" already exists !`
+            ));
             return;
         }
 
@@ -44,7 +45,7 @@ const genreController = {
 
         // Envoi d'un réponse
         res.location('/api/genre/' + newGenre.id);
-        res.status(201).json(newGenre);
+        res.status(201).json(new SuccessResponse(newGenre, 201));
     },
 
     searchByName: async (req, res) => {
@@ -52,11 +53,9 @@ const genreController = {
         const query = req.params.name;
         const { offset, limit } = req.pagination;
 
-        console.log(query);
-        const genresByName = await genreService.searchByName(query, offset, limit);
-        console.log(genresByName);
+        const { genres, count } = await genreService.searchByName(query, offset, limit);
 
-        res.status(200).json(genresByName);
+        res.status(200).json(new SuccessCollectionResponse(genres, count));
     }
 };
 
