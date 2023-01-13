@@ -1,6 +1,6 @@
 const { Op } = require('sequelize');
 const db = require('../models');
-const { GenreDTO } = require('../dto/genre.dto');
+const { GenreDTO, GenreDetailDTO } = require('../dto/genre.dto');
 
 const genreService = {
 
@@ -21,7 +21,7 @@ const genreService = {
         if (!genre) {
             return null;
         }
-        return new GenreDTO(genre);
+        return new GenreDetailDTO(genre);
     },
 
     add: async (data) => {
