@@ -1,7 +1,7 @@
-const ArtistDTO = require('./artist.dto');
-const GenreDTO = require('./genre.dto');
+const { ArtistDTO } = require('./artist.dto');
+const { GenreDTO } = require('./genre.dto');
 
-module.exports = class TrackDTO {
+class TrackDTO {
 
     constructor(data) {
         this.id = data.id;
@@ -11,4 +11,8 @@ module.exports = class TrackDTO {
         this.artists = data.artists ? data.artists.map((a) => new ArtistDTO(a)) : null;
         // this.artists = data.artists?.map((a) => new ArtistDTO(a)) ?? null;
     }
+};
+
+module.exports = {
+    TrackDTO
 };

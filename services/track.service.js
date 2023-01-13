@@ -1,4 +1,4 @@
-const TrackDTO = require('../dto/track.dto');
+const { TrackDTO } = require('../dto/track.dto');
 const db = require('../models');
 
 const trackService = {

@@ -1,4 +1,4 @@
-module.exports = class ArtistDTO {
+class ArtistDTO {
 
     // Props
     id;
@@ -17,4 +17,8 @@ module.exports = class ArtistDTO {
         this.birthday = data.birthday;
         this.country = data.country;
     }
+};
+
+module.exports = {
+    ArtistDTO
 };

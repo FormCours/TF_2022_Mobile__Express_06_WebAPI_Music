@@ -1,6 +1,6 @@
 const { Op } = require('sequelize');
 const db = require('../models');
-const GenreDTO = require('../dto/genre.dto');
+const { GenreDTO } = require('../dto/genre.dto');
 
 const genreService = {
 

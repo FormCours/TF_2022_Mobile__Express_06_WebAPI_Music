@@ -1,4 +1,4 @@
-module.exports = class GenreDTO {
+class GenreDTO {
 
     // Ctor
     constructor(data) {
@@ -7,4 +7,8 @@ module.exports = class GenreDTO {
         this.name = data.name;
         this.desc = data.desc;
     }
+};
+
+module.exports = {
+    GenreDTO
 };

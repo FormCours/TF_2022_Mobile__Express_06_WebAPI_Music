@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const ArtistDTO = require('../dto/artist.dto');
+const { ArtistDTO } = require('../dto/artist.dto');
 const db = require('../models');
 
 const artistService = {
