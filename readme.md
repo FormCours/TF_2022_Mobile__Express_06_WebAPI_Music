@@ -29,6 +29,10 @@ Database
 - sequelize
 - tedious 
 
+Authentification
+- argon2
+- jsonwebtoken
+
 Autres
 - yup
 - morgan
