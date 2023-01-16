@@ -52,5 +52,6 @@ const decodeJWT = (token) => {
 };
 
 module.exports = {
-    generateJWT
+    generateJWT,
+    decodeJWT
 };
